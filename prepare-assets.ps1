@@ -1,4 +1,4 @@
-$ErrorActionPreference='Stop'
+﻿$ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
 $root=Split-Path (Get-Location).Path -Parent
 $records=Get-Content -Raw (Join-Path $root 'assets/behance/image-manifest.json') | ConvertFrom-Json
@@ -11,7 +11,7 @@ foreach($record in $records){
  $index++
  $img=[Drawing.Image]::FromFile((Join-Path $root $record.path))
  foreach($size in @(640,1600)){
-  $scale=[math]::Min(1,$size/[math]::Max($img.Width,$img.Height))
+  $scale=([double]$size/[double][math]::Max($img.Width,$img.Height));if($scale -gt 1){$scale=1.0}
   $bitmap=[Drawing.Bitmap]::new([int][math]::Max(1,[math]::Round($img.Width*$scale)),[int][math]::Max(1,[math]::Round($img.Height*$scale)))
   $graphics=[Drawing.Graphics]::FromImage($bitmap)
   $graphics.InterpolationMode=[Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
@@ -23,3 +23,5 @@ foreach($record in $records){
 }
 $parameters.Dispose()
 Write-Output "Prepared responsive versions of $index photographs."
+
+
