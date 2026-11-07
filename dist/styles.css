@@ -11,3 +11,13 @@ body[data-mood="golden"] .portfolio-card img,body[data-mood="golden"] .story-car
 @media(max-width:1050px){.photo-moods{gap:14px}.story-grid{gap:5%}}
 @media(max-width:700px){.story-grid{grid-template-columns:1fr;gap:0}.story-tall .image-wrap,.story-right .image-wrap{aspect-ratio:4/5;height:auto}.story-tall img,.story-right .story-card img{object-position:center}.portfolio-actions{gap:14px}.portfolio-toolbar{gap:12px}.photo-moods{gap:12px;padding-bottom:20px;margin-top:-10px}.photo-moods>span:first-child{width:100%;font-size:16px}.photo-moods button{font-size:8px}.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;row-gap:24px}.portfolio-card:nth-child(even){margin-top:0}.portfolio-card .image-wrap,.portfolio-card img{aspect-ratio:4/5}}
 @media(prefers-reduced-motion:reduce){.shuffle-button:hover{transform:none}.portfolio-card .image-wrap:after{display:none}}
+
+/* Warm wedding palette: porcelain, ink, berry and champagne. */
+:root{--green:#682d3a;--green-deep:#38232a;--cream:#f8f5ef;--paper:#eee7dd;--gold:#bd965d;--ink:#302b2a;--muted:#79716d;--line:rgba(67,49,45,.18)}
+.site-header{background:var(--cream);color:var(--ink);border-bottom:1px solid var(--line)}
+.header-enquiry{background:var(--green);color:var(--cream);padding:13px 16px;border:0}.header-enquiry:hover{background:var(--green-deep)}
+.hero{background:var(--green);color:var(--cream)}.hero-images{background:#552b32;z-index:-2}.hero-shade{background:linear-gradient(90deg,rgba(73,31,41,.94) 4%,rgba(92,38,52,.85) 27%,rgba(99,46,57,.48) 43%,rgba(99,46,57,.04) 73%),linear-gradient(0deg,rgba(45,29,32,.68),transparent 34%);z-index:-1}
+.hero-image{object-position:center 35%}.hero-photo-title{color:#f8f5ef}.stories,.contact{background:#682d3a}.footer{background:#38232a}.manifesto-shade{background:rgba(55,33,39,.47)}
+.mobile-menu{background:#682d3a}.button-gold{background:#c6a06d;color:#302b2a}.button-gold:hover{background:#d6b887}
+@media(max-width:1050px){.hero-shade{background:linear-gradient(90deg,rgba(73,31,41,.9),rgba(92,38,52,.68) 40%,rgba(99,46,57,.12) 78%),linear-gradient(0deg,rgba(45,29,32,.65),transparent 34%)}}
+@media(max-width:700px){.site-header{background:var(--cream)}.hero-images{width:100%;opacity:1}.hero-image{object-position:58% 30%}.hero-shade{background:linear-gradient(90deg,rgba(73,31,41,.58),rgba(92,38,52,.12)),linear-gradient(0deg,rgba(45,29,32,.86) 1%,rgba(45,29,32,.57) 34%,rgba(45,29,32,.1) 78%)}}
