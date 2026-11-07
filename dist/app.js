@@ -26,9 +26,9 @@ const projects = [
 let activeFilter = 'all';
 let visibleCount = 9;
 const grid = $('#portfolio-grid');
-const categories = {all:'All stories',weddings:'Weddings',fashion:'Fashion & portraits',celebrations:'Celebrations',products:'Details & objects'};
+let projectOrder = [...projects];
 function renderPortfolio() {
-  const filtered = projects.filter(project => activeFilter === 'all' || project.category === activeFilter);
+  const filtered = projectOrder.filter(project => activeFilter === 'all' || project.category === activeFilter);
   const visible = filtered.slice(0, visibleCount);
   grid.replaceChildren(...visible.map((project, index) => {
     const card = document.createElement('button');
@@ -50,6 +50,10 @@ function setFilter(filter) {activeFilter=filter;visibleCount=9;$$('[data-filter]
 $$('[data-filter]').forEach(button => button.addEventListener('click',()=>setFilter(button.dataset.filter)));
 $$('[data-filter-link]').forEach(link=>link.addEventListener('click',()=>setFilter(link.dataset.filterLink)));
 $('#load-more').addEventListener('click',()=>{const firstNewIndex=visibleCount;visibleCount+=9;renderPortfolio();$$('.portfolio-card')[firstNewIndex]?.focus({preventScroll:true});});
+$('#shuffle-stories').addEventListener('click',event=>{for(let i=projectOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[projectOrder[i],projectOrder[j]]=[projectOrder[j],projectOrder[i]];}visibleCount=9;renderPortfolio();$('#portfolio-count').textContent='A new arrangement. '+$('#portfolio-count').textContent;event.currentTarget.animate([{transform:'rotate(0)'},{transform:'rotate(-5deg)'},{transform:'rotate(4deg)'},{transform:'rotate(0)'}],{duration:420,easing:'ease-out'});});
+const moodWords={natural:'true colour',golden:'golden hour',dreamy:'soft focus'};
+$$('[data-mood]').forEach(button=>button.addEventListener('click',()=>{const mood=button.dataset.mood;$$('[data-mood]').forEach(chip=>{const selected=chip===button;chip.classList.toggle('mood-selected',selected);chip.setAttribute('aria-pressed',String(selected));});document.body.dataset.mood=mood;$('#mood-status').textContent=`Showing photographs in ${moodWords[mood]}.`;}));
+grid.addEventListener('pointermove',event=>{if(!matchMedia('(pointer:fine)').matches)return;const wrap=event.target.closest('.image-wrap');if(!wrap)return;const rect=wrap.getBoundingClientRect();wrap.style.setProperty('--pointer-x',`${event.clientX-rect.left}px`);wrap.style.setProperty('--pointer-y',`${event.clientY-rect.top}px`);});
 renderPortfolio();
 
 // Hero: timing pauses for hidden tabs, keyboard focus, and reduced motion preferences.
